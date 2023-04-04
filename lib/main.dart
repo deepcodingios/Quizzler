@@ -51,7 +51,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.questionBank[questionNo].question,
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -81,7 +81,7 @@ class _QuizPageState extends State<QuizPage> {
                 //     color: Colors.green,
                 //   ),
                 // );
-                bool currentAnswer = quizBrain.questionBank[questionNo].answer;
+                bool currentAnswer = quizBrain.getAnswer();
 
                 if (currentAnswer) {
                   scoreKeeper.add(Icon(
@@ -95,7 +95,7 @@ class _QuizPageState extends State<QuizPage> {
                   ));
                 }
                 setState(() {
-                  questionNo++;
+                  quizBrain.nextQuestion();
                 });
               },
             ),
@@ -115,7 +115,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
-                bool currentAnswer = quizBrain.questionBank[questionNo].answer;
+                bool currentAnswer = quizBrain.getAnswer();
                 if (!currentAnswer) {
                   scoreKeeper.add(Icon(
                     Icons.check,
@@ -128,7 +128,7 @@ class _QuizPageState extends State<QuizPage> {
                   ));
                 }
                 setState(() {
-                  questionNo++;
+                  quizBrain.nextQuestion();
                 });
               },
             ),
